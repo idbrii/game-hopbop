@@ -102,9 +102,7 @@ public class FuzzxPlayerControl : MonoBehaviour {
 
     void StartMove(float move_input, float speedLimiterProgress) {
         body.AccelerateRight(Math.Sign(move_input));
-        /*~ 
-        Debug.Log("started move", this);
-        */
+        Debug.Log(string.Format("started move: move_input={0} speedLimiterProgress={1}", move_input, speedLimiterProgress), this);
     }
 
     bool IsRequestingJump() {
