@@ -48,6 +48,8 @@ public class PlatformerBody2D : MonoBehaviour {
         Vector2 new_pos = transform.position;
         delta = new_pos - pos;
 
+        // TODO: If velocity is 0 (we're blocked), then we should not
+        // accelerate.
         queuedAcceleration = dragAccelerationMagnitude;
         queuedAcceleration.x *= ApplyVelocityBasedDrag(velocity.x, dragAccelerationMagnitude.x);
         queuedAcceleration.y *= ApplyVelocityBasedDrag(velocity.y, dragAccelerationMagnitude.y);
@@ -62,12 +64,14 @@ public class PlatformerBody2D : MonoBehaviour {
         }
     }
 
+    // TODO: I think I want these to take a normalized value for direction?
+    // Or at least clamped in -1,1?
     public void AccelerateUp(float direction) {
-        queuedAcceleration.y = Mathf.Abs(direction) * maxAccelerationMagnitude.y;
+        queuedAcceleration.y = direction * maxAccelerationMagnitude.y;
     }
 
     public void AccelerateRight(float direction) {
-        queuedAcceleration.x = Mathf.Abs(direction) * maxAccelerationMagnitude.x;
+        queuedAcceleration.x = direction * maxAccelerationMagnitude.x;
     }
 
 }
